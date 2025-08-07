@@ -2,4 +2,4 @@
 
 Interactive portfolio showcasing my cybersecurity journey, coding skills, and projects.
 
-🔗 **Live Site:** https://yanivhaliwa.github.io/YanivHaliwa
+🔗 **Live Site:** https://yanivhaliwa.github.io/yaniv-portfolio/

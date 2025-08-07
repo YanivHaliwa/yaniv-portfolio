@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yaniv Haliwa - Cybersecurity & Code Ninja</title>
+    <meta name="description" content="Yaniv Haliwa - Cybersecurity Student, Penetration Testing Enthusiast, Python Developer. TryHackMe Top 1% | GitHub Projects">
+    <meta name="keywords" content="cybersecurity, penetration testing, python, hacking, tryhackme, github, kali linux">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #00ff00;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 0, 255, 0.05) 0%, transparent 50%);
+            z-index: -2;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 255, 0, 0.03) 2px,
+                    rgba(0, 255, 0, 0.03) 4px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 255, 0, 0.03) 2px,
+                    rgba(0, 255, 0, 0.03) 4px
+                );
+            z-index: -1;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            scroll-snap-align: start;
+        }
+
+        .slide-content {
+            max-width: 1000px;
+            text-align: center;
+            z-index: 2;
+        }
+
+        /* Slide 1 - Hero */
+        .slide-1 {
+            background: 
+                linear-gradient(45deg, rgba(0, 0, 0, 0.8), rgba(0, 20, 0, 0.9)),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 100px,
+                    rgba(0, 255, 0, 0.1) 100px,
+                    rgba(0, 255, 0, 0.1) 102px
+                );
+            position: relative;
+        }
+
+        .slide-1::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300ff00' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .slide-1 h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+            animation: glow 2s ease-in-out infinite alternate;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 3px;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00; }
+            to { text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00; }
+        }
+
+        .slide-1 .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff;
+        }
+
+        .slide-1 .highlight {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff00;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            box-shadow: 
+                0 0 10px rgba(0, 255, 0, 0.3),
+                inset 0 0 10px rgba(0, 255, 0, 0.1);
+        }
+
+        /* Slide 2 - Skills */
+        .slide-2 {
+            background: 
+                linear-gradient(45deg, rgba(0, 0, 0, 0.9), rgba(20, 0, 0, 0.8)),
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(255, 0, 0, 0.05) 20px,
+                    rgba(255, 0, 0, 0.05) 22px
+                );
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #ff0040;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 0, 64, 0.3);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        .skill-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff;
+        }
+
+        /* Slide 3 - Journey */
+        .slide-3 {
+            background: 
+                linear-gradient(45deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 20, 0.8)),
+                repeating-linear-gradient(
+                    135deg,
+                    transparent,
+                    transparent 30px,
+                    rgba(0, 255, 255, 0.05) 30px,
+                    rgba(0, 255, 255, 0.05) 32px
+                );
+        }
+
+        .journey-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .timeline-item {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #00ffff;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        /* Slide 4 - Current Focus */
+        .slide-4 {
+            background: 
+                linear-gradient(45deg, rgba(0, 0, 0, 0.9), rgba(20, 0, 20, 0.8)),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 50px,
+                    rgba(255, 0, 255, 0.05) 50px,
+                    rgba(255, 0, 255, 0.05) 52px
+                );
+        }
+
+        .focus-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .focus-card {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: left;
+            border: 1px solid #ff00ff;
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .focus-card:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+        }
+
+        /* Slide 5 - Contact */
+        .slide-5 {
+            background: 
+                linear-gradient(45deg, rgba(0, 0, 0, 0.95), rgba(0, 20, 0, 0.9)),
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(0, 255, 0, 0.05) 40px,
+                    rgba(0, 255, 0, 0.05) 42px
+                );
+            color: #00ff00;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            border: 1px solid #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .github-link, .tryhackme-link {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .github-link {
+            border: 2px solid #00ffff;
+            box-shadow: 
+                0 0 15px rgba(0, 255, 255, 0.4),
+                inset 0 0 10px rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff;
+        }
+
+        .github-link:hover {
+            border-color: #00ff00;
+            box-shadow: 
+                0 0 25px rgba(0, 255, 0, 0.6),
+                inset 0 0 15px rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            transform: translateY(-3px);
+        }
+
+        .tryhackme-link {
+            border: 2px solid #ff0040;
+            box-shadow: 
+                0 0 15px rgba(255, 0, 64, 0.4),
+                inset 0 0 10px rgba(255, 0, 64, 0.1);
+            color: #ff0040;
+            text-shadow: 0 0 5px #ff0040;
+        }
+
+        .tryhackme-link:hover {
+            border-color: #00ff00;
+            box-shadow: 
+                0 0 25px rgba(0, 255, 0, 0.6),
+                inset 0 0 15px rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            transform: translateY(-3px);
+        }
+
+        .profile-stats {
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #ff0040;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            box-shadow: 0 0 15px rgba(255, 0, 64, 0.3);
+        }
+
+        /* Navigation */
+        .nav-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(0, 255, 0, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #00ff00;
+        }
+
+        .nav-dot.active {
+            background: #00ff00;
+            transform: scale(1.2);
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        /* Terminal Effect */
+        .terminal-text {
+            font-family: 'Courier New', monospace;
+            background: rgba(0,0,0,0.9);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            text-align: left;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .typing {
+            overflow: hidden;
+            border-right: 0.15em solid orange;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end 7;
+            animation-fill-mode: forwards;
+        }
+
+        .typing.finished {
+            border-right: none;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: orange; }
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            font-family: 'Courier New', monospace;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff;
+        }
+
+        @media (max-width: 768px) {
+            .slide-1 h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .skills-grid, .focus-items {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Slide 1: Hero -->
+        <div class="slide slide-1">
+            <div class="slide-content">
+                <h1>YANIV HALIWA</h1>
+                <div class="subtitle">Cybersecurity Student & Code Enthusiast</div>
+                <div class="highlight">
+                    <div class="terminal-text typing">root@kali:~# whoami && echo "Penetration Tester in Training"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Skills -->
+        <div class="slide slide-2">
+            <div class="slide-content">
+                <h2>My Arsenal</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h3>🐍 Python</h3>
+                        <p>Building bots, automation scripts, and AI-powered tools</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>💻 Penetration Testing</h3>
+                        <p>Learning ethical hacking and security assessment techniques</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>🔧 Multi-Language Coder</h3>
+                        <p>Python, Delphi, C#, Bash - Whatever gets the job done</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>🐧 Kali Linux</h3>
+                        <p>My daily driver for cybersecurity exploration</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>🤖 AI & Automation</h3>
+                        <p>Creating smart solutions and GitHub-ready projects</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>📝 Bash Scripting</h3>
+                        <p>Automating everything from system tasks to complex workflows</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Journey -->
+        <div class="slide slide-3">
+            <div class="slide-content">
+                <h2>My Cybersecurity Journey</h2>
+                <div class="journey-timeline">
+                    <div class="timeline-item">
+                        <h3>🎯 Current Focus</h3>
+                        <p>Deep diving into penetration testing methodologies and hands-on practice</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>🛠️ Building Skills</h3>
+                        <p>Combining coding expertise with cybersecurity knowledge</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>📚 Continuous Learning</h3>
+                        <p>Always exploring new tools, techniques, and staying updated with security trends</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>🎪 Fun Side</h3>
+                        <p>Playful, goofy, and innovative approach to problem-solving</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Current Projects -->
+        <div class="slide slide-4">
+            <div class="slide-content">
+                <h2>What I'm Working On</h2>
+                <div class="focus-items">
+                    <div class="focus-card">
+                        <h3>🔍 Pen-Testing Labs</h3>
+                        <p>Hands-on practice with various penetration testing scenarios and tools</p>
+                    </div>
+                    <div class="focus-card">
+                        <h3>🤖 AI-Powered Tools</h3>
+                        <p>Creating intelligent automation scripts and bots for efficiency</p>
+                    </div>
+                    <div class="focus-card">
+                        <h3>📦 GitHub Projects</h3>
+                        <p>Building reusable tools and scripts for the community</p>
+                    </div>
+                    <div class="focus-card">
+                        <h3>🎓 Skill Development</h3>
+                        <p>Constantly learning and improving through practical application</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Let's Connect -->
+        <div class="slide slide-5">
+            <div class="slide-content">
+                <h2>Ready to Collaborate</h2>
+                <p style="font-size: 1.3rem; margin-bottom: 1rem;">
+                    Whether it's cybersecurity challenges, coding projects, or innovative automation ideas - let's build something awesome together!
+                </p>
+                
+                <div class="profile-stats">
+                    🏆 **TryHackMe Stats:** Rank #5264 | Top 1% | 250 Completed Rooms | 30 Badges
+                </div>
+                
+                <a href="https://github.com/YanivHaliwa?tab=repositories" target="_blank" class="github-link">
+                    🔗 GitHub: YanivHaliwa - Check out my repositories
+                </a>
+                
+                <a href="https://tryhackme.com/p/YanivHaliwa" target="_blank" class="tryhackme-link">
+                    🎯 TryHackMe: YanivHaliwa - See my hacking progress
+                </a>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        🐧 Kali Linux Enthusiast | QTerminal Power User
+                    </div>
+                    <div class="contact-item">
+                        💡 Always up for a challenge and ready to think outside the box
+                    </div>
+                    <div class="contact-item">
+                        🚀 From concept to GitHub deployment - Let's make it happen!
+                    </div>
+                </div>
+                <div class="terminal-text" style="margin-top: 2rem;">
+                    <div>yaniv@kali:~$ echo "Thanks for checking out my profile!"</div>
+                    <div>yaniv@kali:~$ ./start_awesome_project.py</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-dots">
+        <div class="nav-dot active" onclick="scrollToSlide(0)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(1)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(2)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(3)"></div>
+        <div class="nav-dot" onclick="scrollToSlide(4)"></div>
+    </div>
+
+    <script>
+        function scrollToSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            const targetSlide = slides[index];
+            targetSlide.scrollIntoView({ behavior: 'smooth' });
+            
+            // Update active dot
+            document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        // Auto-update active dot on scroll
+        window.addEventListener('scroll', () => {
+            const slides = document.querySelectorAll('.slide');
+            const scrollPos = window.scrollY + window.innerHeight / 2;
+            
+            slides.forEach((slide, index) => {
+                const slideTop = slide.offsetTop;
+                const slideBottom = slideTop + slide.offsetHeight;
+                
+                if (scrollPos >= slideTop && scrollPos < slideBottom) {
+                    document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+                        dot.classList.toggle('active', i === index);
+                    });
+                }
+            });
+        });
+
+        // Smooth scrolling for the entire page
+        document.documentElement.style.scrollBehavior = 'smooth';
+
+        // Stop cursor blinking after typing animation
+        setTimeout(() => {
+            const typingElement = document.querySelector('.typing');
+            if (typingElement) {
+                typingElement.classList.add('finished');
+            }
+        }, 4000); // Stop after 4 seconds (3.5s typing + 0.5s buffer)
+    </script>
+</body>
+</html>
